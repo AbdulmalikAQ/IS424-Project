@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Assignments</h2>
+    <table class="table table-striped mt-4">
+        <thead class="table-light" style="background-color: lightblue;">
+            <tr>
+                <th>Subject</th>
+                <th>Due Date</th>
+                <th>Number of Students</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.subject }}</td>
+                    <td>{{ assignment.due_date }}</td>
+                    <td>{{ assignment.students.count }}</td>
+                    <td>
+                        <a href="{% url 'assignment_detail' assignment.pk %}" class="btn btn-success">View</a>
+                        {% if user_type == 'teacher' %}
+                            <a href="{% url 'assignment_update' assignment.pk %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'assignment_delete' assignment.pk %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

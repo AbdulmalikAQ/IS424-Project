@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="text-center">
+            <h3 class="card-title mb-0">{{ assignment.subject }}</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-subtitle mt-3 mb-2">Description</h5>
+            <p class="card-text">{{ assignment.description }}</p>
+            <h5 class="card-subtitle mt-4">Students</h5>
+            <ul class="list-group mt-2">
+                {% for student in assignment.students.all %}
+                <li class="ml-4">{{ student.username }}</li>
+                {% endfor %}
+            </ul>
+            <p class="card-text mt-4"><strong>Due Date:</strong> {{ assignment.due_date }}</p>
+            <div class="mt-4 d-flex justify-content-between">
+                <a href="{% url 'assignments' %}" class="btn btn-secondary">Back to Assignments</a>
+                {% if request.session.is_superuser %}
+                <div>
+                    <a href="{% url 'assignment_update' assignment.pk %}" class="btn btn-primary mr-2">Edit Assignment</a>
+                    <a href="{% url 'assignment_delete' assignment.pk %}" class="btn btn-danger">Delete Assignment</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
