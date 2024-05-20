@@ -3,10 +3,13 @@
 
 {% block content %}
 <div class="container mt-4 d-flex justify-content-center">
-    <div class="card mt-5 shadow2-drop" style="width: 28rem;">
-        <img src="{% static 'images/image2.png' %}" class="rounded-circle mx-auto d-block" alt="" style="max-width: 300px;">
+    <div class="card mt-5" style="width: 28rem;">
+        <img src="{% static 'images/AMS_logo.png' %}" class="rounded-circle mx-auto d-block" alt="" style="max-width: 300px;">
         <div class="card-body">
             <h3 class="card-title text-center">Login</h3>
+            {% if error_message %}
+                <div class="alert alert-danger">{{ error_message }}</div>
+            {% endif %}
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group">
